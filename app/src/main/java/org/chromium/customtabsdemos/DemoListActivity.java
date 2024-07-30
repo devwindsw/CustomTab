@@ -52,6 +52,16 @@ public class DemoListActivity extends AppCompatActivity {
                 PartialCustomTabActivity.class);
         activityDescList.add(activityDesc);
 
+        activityDesc = createActivityDesc(R.string.title_activity_service_connection,
+                R.string.description_activity_service_connection,
+                ServiceConnectionActivity.class);
+        activityDescList.add(activityDesc);
+
+        activityDesc = createActivityDesc(R.string.title_activity_notification_parent,
+                R.string.title_activity_notification_parent,
+                NotificationParentActivity.class);
+        activityDescList.add(activityDesc);
+
         RecyclerView recyclerView = findViewById(android.R.id.list);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

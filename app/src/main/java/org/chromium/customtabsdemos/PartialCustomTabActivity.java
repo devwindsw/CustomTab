@@ -13,10 +13,8 @@
 // limitations under the License.
 package org.chromium.customtabsdemos;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,7 +24,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.browser.customtabs.CustomTabsSession;
 
 /**
  * Opens Partial-height Chrome Custom Tab.
@@ -38,7 +35,7 @@ import androidx.browser.customtabs.CustomTabsSession;
  * <ul>
  *   <li> Prior to Chrome M107, this can be customized with a legacy intent extra flag
  *     "androidx.browser.customtabs.extra.INITIAL_ACTIVITY_HEIGHT_IN_PIXEL". </li>
- *   <li> From M107, {@link CustomTabIntent.Builder#setInitialActivityHeightPx()} is supported.</li>
+ *   <li> From M107, {@link CustomTabsIntent.Builder#setInitialActivityHeightPx(int, int)} is supported.</li>
  * </ul>
  *
  * <h3> Fixed-height tab </h3>
@@ -47,7 +44,7 @@ import androidx.browser.customtabs.CustomTabsSession;
  *   <li> From M107, this can be set to fixed with an intent extra flag
  *     CustomTabsIntent.EXTRA_ACTIVITY_RESIZE_BEHAVIOR set to
  *     CustomTabsIntent.ACTIVITY_HEIGHT_FIXED. </li>
- *   <li> From M107, {@link CustomTabIntent.Builder#setInitialActivityHeightPx(int, int)}
+ *   <li> From M107, {@link CustomTabsIntent.Builder#setInitialActivityHeightPx(int, int)}
  *     is also supported to specify the height and resize behavior. </li>
  * </ul>
  *
@@ -62,7 +59,7 @@ import androidx.browser.customtabs.CustomTabsSession;
  *   <li> The maximum radius is 16dp, also the default value. </li>
  *   <li> Prior to M107, this can be customized with a legacy intent extra flag
  *     "androidx.browser.customtabs.extra.TOOLBAR_CORNER_RADIUS_IN_PIXEL" </li>
- *   <li> From M107, {@link CustomTabIntent.Builder#setToolbarCornerRadiusDp()} is supported. </li>
+ *   <li> From M107, {@link CustomTabsIntent.Builder#setToolbarCornerRadiusDp(int)} is supported. </li>
  * </ul>
  *
  * <h3> Background app interaction </h3>
@@ -74,7 +71,6 @@ import androidx.browser.customtabs.CustomTabsSession;
  * </ul>
  */
 public class PartialCustomTabActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "PartialCustomTabActivity";
     private static final int INITIAL_HEIGHT_DEFAULT_PX = 600;
     private static final int CORNER_RADIUS_MAX_DP = 16;
     private static final int CORNER_RADIUS_DEFAULT_DP = CORNER_RADIUS_MAX_DP;

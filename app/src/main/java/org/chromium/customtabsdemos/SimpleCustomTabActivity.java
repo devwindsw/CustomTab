@@ -2,14 +2,12 @@ package org.chromium.customtabsdemos;
 
 import static org.chromium.customtabsdemos.R.id.start_custom_tab;
 
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.browser.customtabs.CustomTabsIntent;
 
 public class SimpleCustomTabActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText mUrlEditText;

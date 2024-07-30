@@ -69,8 +69,7 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
                                      boolean enableBackgroundInteract, Uri uri) {
         log("openPartialCustomTab");
         // Uses the established session to build a PCCT intent.
-        CustomTabsSession session = getSession();
-        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder(session);
+        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder(getSession());
         intentBuilder.setInitialActivityHeightPx(initialHeightDefaultPx, resizeBehavior);
         intentBuilder.setToolbarCornerRadiusDp(toolbarCornerRadiusDp);
 
@@ -91,6 +90,26 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
                     BACKGROUND_INTERACT_OFF_VALUE);
         }
         customTabsIntent.launchUrl(activity, uri);
+    }
+
+    /**
+     * Opens the URL on a Custom Tab if possible. Otherwise fallsback to opening it on a WebView.
+     *
+     * @param activity the host activity.
+     * @param uri the Uri to be opened.
+     */
+    public boolean openCustomTab(Activity activity, Uri uri) {
+        String packageName = CustomTabsHelper.getPackageNameToUse(activity);
+
+        //If we cant find a package name, it means theres no browser that supports
+        //Chrome Custom Tabs installed. So, we fallback to the webview
+        if (packageName == null) {
+            return false;
+        }
+        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder(getSession()).build();
+        customTabsIntent.intent.setPackage(packageName);
+        customTabsIntent.launchUrl(activity, uri);
+        return true;
     }
 
     /**
@@ -173,7 +192,7 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
 
     @Override
     public void onServiceConnected(CustomTabsClient client) {
-        loge("onServiceConnected");
+        log("onServiceConnected");
         mClient = client;
         mClient.warmup(0L);
         if (mConnectionCallback == null) {
