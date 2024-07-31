@@ -97,9 +97,10 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
      * Opens the URL on a Custom Tab if possible. Otherwise fallsback to opening it on a WebView.
      *
      * @param activity the host activity.
+     * @param customTabsIntent
      * @param uri the Uri to be opened.
      */
-    public boolean openCustomTab(Activity activity, Uri uri) {
+    public boolean openCustomTab(Activity activity, CustomTabsIntent customTabsIntent, Uri uri) {
         String packageName = CustomTabsHelper.getPackageNameToUse(activity);
 
         //If we cant find a package name, it means theres no browser that supports
@@ -107,7 +108,9 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
         if (packageName == null) {
             return false;
         }
-        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder(getSession(null)).build();
+        if (customTabsIntent == null) {
+            customTabsIntent = new CustomTabsIntent.Builder(getSession(null)).build();
+        }
         customTabsIntent.intent.setPackage(packageName);
         customTabsIntent.launchUrl(activity, uri);
         return true;

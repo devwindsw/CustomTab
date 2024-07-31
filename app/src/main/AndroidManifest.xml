@@ -75,6 +75,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DemoListActivity" />
         </activity>
+        <activity
+            android:name=".CustomUIActivity"
+            android:label="@string/title_activity_customized_chrome_tab"
+            android:parentActivityName=".DemoListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DemoListActivity" />
+        </activity>
+
+        <receiver android:name=".ActionBroadcastReceiver" />
+
     </application>
 
 </manifest>

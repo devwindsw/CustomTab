@@ -67,6 +67,11 @@ public class DemoListActivity extends AppCompatActivity {
                 EngagementSignalsActivity.class);
         activityDescList.add(activityDesc);
 
+        activityDesc = createActivityDesc(R.string.title_activity_customized_chrome_tab,
+                R.string.description_activity_customized_chrome_tab,
+                CustomUIActivity.class);
+        activityDescList.add(activityDesc);
+
         RecyclerView recyclerView = findViewById(android.R.id.list);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -122,7 +122,7 @@ public class NotificationParentActivity extends AppCompatActivity implements Vie
             CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
                     .setToolbarColor(tabcolor)
                     .build();*/
-            mCustomTabActivityHelper.openCustomTab(this, uri);
+            mCustomTabActivityHelper.openCustomTab(this, null, uri);
 
             //mMessageTextView.setVisibility(View.VISIBLE);
             //mCreateNotificationButton.setVisibility(View.GONE);

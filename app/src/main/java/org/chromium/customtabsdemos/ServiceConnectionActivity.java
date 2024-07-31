@@ -81,7 +81,7 @@ public class ServiceConnectionActivity extends AppCompatActivity
             mCustomTabActivityHelper.mayLaunchUrl(uri, null, null);
         } else if (viewId == R.id.start_custom_tab) {
             log("onClick openCustomTab");
-            mCustomTabActivityHelper.openCustomTab(this, uri);
+            mCustomTabActivityHelper.openCustomTab(this, null, uri);
         }
     }
 
