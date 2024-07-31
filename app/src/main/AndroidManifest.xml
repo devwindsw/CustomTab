@@ -83,7 +83,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DemoListActivity" />
         </activity>
-
+        <activity
+            android:name=".WebviewActivity"
+            android:label="@string/title_activity_webview"
+            android:parentActivityName=".DemoListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DemoListActivity" />
+        </activity>
         <receiver android:name=".ActionBroadcastReceiver" />
 
     </application>
