@@ -46,8 +46,9 @@ public class ServiceConnectionActivity extends AppCompatActivity
         findViewById(R.id.start_custom_tab).setOnClickListener(this);
 
         mCustomTabActivityHelper = new CustomTabActivityHelper();
-        if (mCustomTabActivityHelper.bindCustomTabsService(this)) {
-            mCustomTabActivityHelper.setConnectionCallback(this);
+        mCustomTabActivityHelper.setConnectionCallback(this);
+        if (!mCustomTabActivityHelper.bindCustomTabsService(this)) {
+            // Failed to request binding service.
         }
     }
 

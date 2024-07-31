@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.browser.customtabs.CustomTabsCallback;
 import androidx.browser.customtabs.CustomTabsClient;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.browser.customtabs.CustomTabsServiceConnection;
@@ -69,7 +70,7 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
                                      boolean enableBackgroundInteract, Uri uri) {
         log("openPartialCustomTab");
         // Uses the established session to build a PCCT intent.
-        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder(getSession());
+        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder(getSession(null));
         intentBuilder.setInitialActivityHeightPx(initialHeightDefaultPx, resizeBehavior);
         intentBuilder.setToolbarCornerRadiusDp(toolbarCornerRadiusDp);
 
@@ -106,7 +107,7 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
         if (packageName == null) {
             return false;
         }
-        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder(getSession()).build();
+        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder(getSession(null)).build();
         customTabsIntent.intent.setPackage(packageName);
         customTabsIntent.launchUrl(activity, uri);
         return true;
@@ -129,13 +130,13 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
      *
      * @return a CustomTabsSession.
      */
-    public CustomTabsSession getSession() {
+    public CustomTabsSession getSession(CustomTabsCallback customTabsCallback) {
         if (mClient == null) {
             loge("getSession null client");
             mCustomTabsSession = null;
         } else if (mCustomTabsSession == null) {
             log("getSession get new session");
-            mCustomTabsSession = mClient.newSession(null);
+            mCustomTabsSession = mClient.newSession(customTabsCallback);
         }
         return mCustomTabsSession;
     }
@@ -179,7 +180,7 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
         	return false;
         }
 
-        CustomTabsSession session = getSession();
+        CustomTabsSession session = getSession(null);
         if (session == null) {
             loge("mayLaunchUrl null session");
             return false;

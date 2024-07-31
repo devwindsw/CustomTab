@@ -67,6 +67,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DemoListActivity" />
         </activity>
+        <activity
+            android:name=".EngagementSignalsActivity"
+            android:label="@string/title_activity_engagement_signals"
+            android:parentActivityName=".DemoListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DemoListActivity" />
+        </activity>
     </application>
 
 </manifest>
